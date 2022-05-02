@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <meta charset="utf-8">
-    <link rel="icon" href="logoWrp.png" type="image/x-icon">
+    <link rel="icon" href="img/logoWrp.png" type="image/x-icon">
     <title>Weather Research Program</title>
 </head>
 <body>
@@ -28,7 +28,7 @@
             <div class="col-lg-2">
                 <div class="col mt-5">
                     <div class="img">
-                        <img src="logoWrp.png" class="img-fluid" alt="Responsive image">
+                        <img src="img/logoWrp.png" class="img-fluid" alt="Responsive image">
                     </div>
                 </div>
             </div>
