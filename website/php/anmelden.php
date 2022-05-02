@@ -26,7 +26,7 @@
 
 <?php
 
-$db = new mysqli('localhost', 'root', '', 'chat');
+$db = new mysqli('localhost', 'myadmin', '', 'WRP');
 if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
     exit();
@@ -45,7 +45,7 @@ if(isset($_POST['absenden'])) {
     if ($result->num_rows == 1) {
         $search_object = $result->fetch_object();            // Um die ID zu kriegen
         $_SESSION['user'] = $search_object->id;         // Session wird an Hand der ID gespeichert
-        header('Location: /Chat/');
+        header('Location: /php/WRP.php');
     } else {
         echo 'Angaben nicht korrekt!';
     }
