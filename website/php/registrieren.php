@@ -35,7 +35,7 @@
 
 <?php
 
-$db = new mysqli('localhost', 'root', '', 'chat');
+$db = new mysqli('localhost', 'myadmin', '', 'WRP');
 if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
     exit();
