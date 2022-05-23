@@ -15,9 +15,8 @@ session_start();
 
 <body>
 	<div class="row">
-		
 		<div class="col ms-3 mt-2">
-			<img src="file:///D|/Programme/XAMPP/htdocs/img/logoWrp.png" class="row img-fluid"></img>
+			<img src="../img/logoWrp.png" class="row img-fluid"></img>
 		</div>
 		<div class="col-10"></div>
 	</div>
@@ -34,14 +33,9 @@ session_start();
             <input type='password' class='form-control' name='passwort' placeholder='Passwort'>
         </div>
 		
-		<div class="row mt-4">
-			<div class="col-5"></div>
-			<div class="col-1">
-				<button type='submit' class='btn btn-secondary' name='absenden'>Login</button>
-			</div>
-			<div class="col-2">
-				<a href="file:///D|/Programme/XAMPP/htdocs/Chat/registrierung.php" class="btn btn-secondary me-md-2">Zur Registrierung</a>
-			</div>
+		<div class="d-grid gap-3 mt-3 d-md-flex justify-content-md-center">
+  			<button type='submit' class='btn btn-secondary' name='absenden'>Login</button>
+			<a href="registrieren.php" class="btn btn-secondary me-md-2">Zur Registrierung</a>
 		</div>
         
     </form>
