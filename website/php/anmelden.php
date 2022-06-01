@@ -14,55 +14,72 @@ session_start();
 </head>
 
 <body>
-	<div class="row">
-		<div class="col-10"></div>
-		<div class="col ms-3 mt-3 me-3">
-			<img src="../img/logoWrp.png" class="row img-fluid"></img>
-		</div>
-	</div>
-	
+        <div class="row">
+                <div class="col-10"></div>
+                <div class="col ms-3 mt-3 me-3">
+                        <img src="../img/logoWrp.png" class="row img-fluid"></img>
+                </div>
+        </div>
+
     <h1 class="row justify-content-center">Anmeldung</h1>
-   
+
     <form action="" method='post' class="m-5 mt-2">
         <div class='form-group'>
-            <label for='benutzername'>Benutzername: </label>
+            <label for='benutzername'>E-Mail-Adresse: </label>
             <input type='text' class='form-control' name='benutzername' aria-describedby='emailHelp' placeholder='Benutzername'>
         </div>
         <div class='form-group mt-3'>
             <label for='passwort'>Passwort: </label>
             <input type='password' class='form-control' name='passwort' placeholder='Passwort'>
         </div>
-		
-		<div class="d-grid gap-3 mt-4 d-md-flex justify-content-md-center btn-group">
-			<a href="registrieren.php" class="btn btn-secondary ">Registrierung</a>
-			<button type='submit' class='btn btn-secondary' name='absenden'>Login</button>
-		</div>
+
+                <div class="d-grid gap-3 mt-4 d-md-flex justify-content-md-center btn-group">
+                        <a href="registrieren.php" class="btn btn-secondary ">Registrierung</a>
+                        <button type='submit' class='btn btn-secondary' name='absenden'>Login</button>
+                </div>
     </form>
-	
+
 </body>
 </html>
 
 <?php
+$servername = "localhost";
+$username = "myadmin";
+$password = "";
 
-//database connection
-$db = mysqli_connect('localhost', 'root','','WRP');
+try {
+  $db = new PDO("mysql:host=$servername;dbname=WRP", $username, $password);
+  // set the PDO error mode to exception
+  $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  echo "Connected successfully";
+} catch(PDOException $e) {
+  echo "Connection failed: " . $e->getMessage();
+}
 
+// Anmelden...
 if(isset($_POST['absenden'])) {
-    $benutzername = strtolower($_POST['benutzername']);
+    // Eingaben in Variablen speichern
+    $email = strtolower($_POST['benutzername']);
     $passwort = $_POST['passwort'];
     $passwort = md5($passwort);
 
-    $search_user = $db->prepare("SELECT username FROM users WHERE username = ? AND password = ?");
-    $search_user->bind_param('ss',$benutzername, $passwort);
-    $search_user->execute();
-    $result = $search_user->get_result();
+    // Die Daten aus der Datenbank holen
+    $sql = "SELECT * FROM Benutzer WHERE Email = '".$email."' AND Passwort = '".$passwort."'";
+    foreach($db->query($sql) as $row) {
+        $id = $row['ID'];
+    }
 
-    if ($result->num_rows == 1) {
-        $search_object = $result->fetch_object();  		      
-        $_SESSION['user'] = $search_object->username;         
+    // Schauen ob schon angemeldet
+    $sql = "SELECT COUNT(ID) FROM Benutzer WHERE ID = '".$id."'";
+    $res = $db->query($sql);
+    $idcount = $res->fetchColumn();
+
+    // Wenn 1
+    if ($idcount == 1) {
+        $_SESSION['user'] = $id;            // Session starten
         header('Location: WRP.php');
     } else {
-        echo 'Passwort oder Benutzername sind falsch';
+        echo 'Angaben nicht korrekt!';          // Sonst die Ausgabe
     }
 }
 
